@@ -12,7 +12,10 @@ def index():
     return {'message' : "Hello World !"}
 
 # summary and description
-@app.get('/blog/all',tags = ['blog'], summary = 'Retrieve all blogs', description = 'this api fetches all blogs.')
+@app.get('/blog/all',tags = ['blog'], 
+         summary = 'Retrieve all blogs', \
+         description = 'this api fetches all blogs.',\
+         response_description = "the list of available blogs are found")
 def get_all_blogs(page=1):
     return {'message' : f'it has {page} pages.'}
     
