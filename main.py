@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from enum import Enum
 from typing import Optional
-from fastapi import status
+from fastapi import status,Response
 
 # we use this line to start our server and to define our path(@app.get)
 app = FastAPI()
@@ -11,13 +11,14 @@ app = FastAPI()
 def index():
     return {'message' : "Hello World !"}
 
-
-# with status library, printing status
+# return status code on response as well
 @app.get('/blog/{id}', status_code= status.HTTP_404_NOT_FOUND)
-def get_blog(id : int):
+def get_blog(id : int,response:Response):
     if id > 100 :
+        response.status_code = status.HTTP_404_NOT_FOUND
         return {'error' : f'Blog {id} not found XO'}
     else:
+        response.status_code = status.HTTP_200_OK
         return {'message' : f'blog with id {id} found succesfully!!!'}
 #query and path parameters
 @app.get('/blog/{id}/comments/{comment_id}')
