@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from enum import Enum
 from typing import Optional
+from fastapi import status
 
 # we use this line to start our server and to define our path(@app.get)
 app = FastAPI()
@@ -11,6 +12,13 @@ def index():
     return {'message' : "Hello World !"}
 
 
+# with status library, printing status
+@app.get('/blog/{id}', status_code= status.HTTP_404_NOT_FOUND)
+def get_blog(id : int):
+    if id > 100 :
+        return {'error' : f'Blog {id} not found XO'}
+    else:
+        return {'message' : f'blog with id {id} found succesfully!!!'}
 #query and path parameters
 @app.get('/blog/{id}/comments/{comment_id}')
 def get_comment(id:int,comment_id:int,valid:bool=True,username:Optional[str] = None):
@@ -36,9 +44,4 @@ class BlogType(str,Enum) :
 @app.get('/blog/type/{type}')
 def get_blog_type(type:BlogType):
     return {'message' : f'Blog type {type}'}
-
-#path parameters
-@app.get('/blog/{id}')
-def index2(id):
-    return { 'message' : f"blog with id {id}"}
 
