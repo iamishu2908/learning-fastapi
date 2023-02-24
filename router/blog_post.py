@@ -13,6 +13,6 @@ class BlogModel(BaseModel):
     published : Optional[bool]
     nb_comments: int
     
-@router.post('/new')
-def create_blog(blog : BlogModel):
-    return {'data':blog}
+@router.post('/new/{id}')
+def create_blog(blog : BlogModel, id:int, version : int =1):
+    return {'id':id,'version':version,'data':blog}
