@@ -11,7 +11,7 @@ class Image(BaseModel):
     url:str
     alias:str
 
-class BlogModel(BaseModel):
+class BlogModel(BaseModel): # inheriting basemodel 
     title : str
     content : str
     published : Optional[bool]
