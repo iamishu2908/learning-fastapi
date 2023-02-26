@@ -37,9 +37,9 @@ def get_blogs(page = 1, pagesize : Optional[int] = None, req_paramter: dict = De
     return {'message' : f'There are {pagesize} pages on page {page}', 'req':req_paramter}
 #query parameters(defined values)
 
-@router.get('/all')
-def get_blogs(page = 1, pagesize = 10):
-    return {'message' : f'There are {pagesize} pages on page {page}'}
+# @router.get('/all')
+# def get_blogs(page = 1, pagesize = 10):
+#     return {'message' : f'There are {pagesize} pages on page {page}'}
 
 # predefined values
 class BlogType(str,Enum) :
