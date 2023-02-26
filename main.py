@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from router import blog_get
 from router import blog_post
+from fastapi import Request
+from exceptions import StoryException
+from fastapi.responses import JSONResponse
 
 from db import models
 from db.database import engine
@@ -18,5 +21,12 @@ app.include_router(blog_post.router)
 @app.get('/')
 def index():
     return {'message' : "Hello World !"}
+
+@app.exception_handler(StoryException)
+def story_exception_handler(request:Request,exp: StoryException):
+    return JSONResponse(
+        status_code = 418,
+        content = {'detail' : exp.name}
+    )
 
 models.Base.metadata.create_all(engine)
