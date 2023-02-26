@@ -14,3 +14,10 @@ def create_user(db : Session, request : UserBase):
     db.commit()# this sends the operation to the database
     db.refresh(new_user)# daabase usually autogenerates a user detail.sp performing refresh will update the value on both ends correctly
     return new_user
+
+def get_all_users(db:Session):
+    return db.query(DbUser).all()# read all users from table
+
+def get_user(db:Session, id:int):
+    return db.query(DbUser).filter(DbUser.id==id).first()
+
