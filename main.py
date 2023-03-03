@@ -7,6 +7,7 @@ from exceptions import StoryException
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 from fastapi.responses import PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from db import models
 from db.database import engine
@@ -38,4 +39,17 @@ def story_exception_handler(request:Request,exp: StoryException):
 # def custom_handler(request:Request,exp:StoryException):
 #     return PlainTextResponse(str(exp),status_code = 400)
 
+
 models.Base.metadata.create_all(engine)
+
+origins = [
+    'http://localhost:3000'
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = origins,
+allow_credentials = True,
+allow_methods = ['*'],
+allow_headers = ['*']
+)
