@@ -15,6 +15,8 @@ from router import user
 from router import article
 from router import product
 
+from auth import authentication
+
 # we use this line to start our server and to define our path(@app.get)
 app = FastAPI()
 app.include_router(user.router)
@@ -22,6 +24,8 @@ app.include_router(article.router)
 app.include_router(blog_get.router)
 app.include_router(blog_post.router)
 app.include_router(product.router)
+
+app.include_router(authentication.router)
 
 #attaching function to an endpoint
 @app.get('/')
